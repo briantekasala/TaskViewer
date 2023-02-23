@@ -6,12 +6,17 @@ import { FillInForm } from "../components/FillInForm";
 
 export const LoginScreen = () => {
   const [loginCorrect, setLoginCorrect] = useState<boolean>(false);
+  const [user, setUser] = useState<string>("");
   return (
     <View>
       {!loginCorrect ? (
-        <FillInForm type="login" setLoginCorrect={setLoginCorrect} />
+        <FillInForm
+          type="login"
+          setLoginCorrect={setLoginCorrect}
+          setUser={setUser}
+        />
       ) : (
-        <AlertMessage />
+        <AlertMessage user={user} />
       )}
     </View>
   );

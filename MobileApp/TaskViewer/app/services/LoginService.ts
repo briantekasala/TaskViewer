@@ -1,3 +1,4 @@
+import { ILogin } from "../utils/Ilogin";
 import { ILoginService } from "./contracts/ILoginService";
 
 export class LoginService implements ILoginService {
@@ -6,7 +7,7 @@ export class LoginService implements ILoginService {
     this.url = apiURl;
   }
 
-  async checkUser(loginCredentials: ILoginService): Promise<ILoginService[]> {
+  async checkUser(loginCredentials: ILogin): Promise<ILogin[]> {
     try {
       const checkUserLogin = await fetch(`${this.url}/login`, {
         headers: {
@@ -20,7 +21,7 @@ export class LoginService implements ILoginService {
         throw new Error(await checkUserLogin.text());
       }
 
-      const userLoginResult: ILoginService[] = await checkUserLogin.json();
+      const userLoginResult: ILogin[] = await checkUserLogin.json();
       return userLoginResult;
     } catch (error) {
       throw new Error("error", { cause: error });

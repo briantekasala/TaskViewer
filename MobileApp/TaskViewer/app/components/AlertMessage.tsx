@@ -1,19 +1,47 @@
 import { Card, Button } from "react-native-paper";
 import { Text, StyleSheet } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { StackParams } from "../../App";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 interface IAlertMessage {
   user: string;
+  headText: string;
+  subText: string;
+  buttonText: string;
 }
 export const AlertMessage = (props: IAlertMessage) => {
-  const { user } = props;
+  const { user, headText, subText, buttonText } = props;
+  const navigation = useNavigation<NativeStackNavigationProp<StackParams>>();
+  let navText = "Login";
   return (
     <Card style={style.alertContent}>
       <Card.Title title="Success" titleStyle={style.alertText} />
       <Card.Content>
-        <Text style={style.alertText}>Welcome {user}</Text>
-        <Text style={style.alertText}>See here the planning</Text>
+        <Text style={style.alertText}>
+          {user === "" ? headText : `${headText} ${user}`}
+        </Text>
+        <Text style={style.alertText}>{subText}</Text>
       </Card.Content>
       <Card.Actions style={style.alertButton}>
-        <Button mode="contained">Planning</Button>
+        {buttonText === "Login" ? (
+          <Button
+            mode="contained"
+            onPress={() => {
+              navigation.navigate(`Login`);
+            }}
+          >
+            {buttonText}
+          </Button>
+        ) : (
+          <Button
+            mode="contained"
+            onPress={() => {
+              navigation.navigate(`Planning`);
+            }}
+          >
+            {buttonText}
+          </Button>
+        )}
       </Card.Actions>
     </Card>
   );

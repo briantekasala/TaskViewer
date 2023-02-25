@@ -1,30 +1,27 @@
-import * as React from "react";
 import { useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { View, StyleSheet } from "react-native";
 import { AlertMessage } from "../components/AlertMessage";
 import { FillInForm } from "../components/FillInForm";
-import { useNavigation } from "@react-navigation/native";
 
-export const LoginScreen = () => {
+export const SignUpScreen = () => {
   const [loginCorrect, setLoginCorrect] = useState<boolean>(false);
   const [user, setUser] = useState<string>("");
-
   return (
     <View style={style.container}>
       {!loginCorrect ? (
         <FillInForm
-          headText="Login"
-          subText="login in "
-          type="login"
-          setLoginCorrect={setLoginCorrect}
+          headText="Sign In"
+          subText="make a account to login"
           setUser={setUser}
+          setLoginCorrect={setLoginCorrect}
+          type="signUp"
         />
       ) : (
         <AlertMessage
           user={user}
           headText={"Welcome"}
-          subText={"See here the planning"}
-          buttonText={"Planning"}
+          subText={"login in to see planning"}
+          buttonText={"Login"}
         />
       )}
     </View>

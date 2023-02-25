@@ -1,11 +1,11 @@
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack/lib/typescript/src/types";
 import { Controller, useForm } from "react-hook-form";
-import { StyleSheet } from "react-native";
+import { StyleSheet, View, Text } from "react-native";
 import { Button, Card, TextInput } from "react-native-paper";
 import { StackParams } from "../../App";
 import { LoginService } from "../services/LoginService";
-import { ILogin } from "../utils/Ilogin";
+import { ILogin } from "../utils/ILogin";
 
 interface IFillInForm {
   type: string;
@@ -30,6 +30,8 @@ export const FillInForm = (props: IFillInForm) => {
       }
     }
     if (type === "signUp") {
+      const signUpUser = await services.signUpUser(data);
+      console.log(signUpUser);
       setLoginCorrect((prevState) => !prevState);
     }
   };
@@ -40,43 +42,62 @@ export const FillInForm = (props: IFillInForm) => {
         <Controller
           name="user"
           control={control}
-          render={({ field: { onChange, value } }) => (
-            <TextInput
-              style={style.cardText}
-              label={"user"}
-              onChangeText={onChange}
-              value={value}
-            />
+          render={({ field: { onChange, value }, fieldState: { error } }) => (
+            <View>
+              <TextInput
+                style={[style.cardText]}
+                label={"user"}
+                onChangeText={onChange}
+                value={value}
+                underlineColor={error ? "red" : "rgb(109, 88, 105)"}
+              />
+              {error && (
+                <Text style={style.cardErrorText}>{error.message}</Text>
+              )}
+            </View>
           )}
-          rules={{ required: true }}
+          rules={{ required: "User name should not be empty" }}
         />
         <Controller
           name="password"
           control={control}
-          render={({ field: { onChange, value } }) => (
-            <TextInput
-              secureTextEntry
-              style={style.cardText}
-              label={"password"}
-              onChangeText={onChange}
-              value={value}
-            />
+          render={({ field: { onChange, value }, fieldState: { error } }) => (
+            <View>
+              <TextInput
+                secureTextEntry
+                style={style.cardText}
+                label={"password"}
+                onChangeText={onChange}
+                value={value}
+                underlineColor={error ? "red" : "rgb(109, 88, 105)"}
+              />
+              {error && (
+                <Text style={style.cardErrorText}>{error.message}</Text>
+              )}
+            </View>
           )}
-          rules={{ required: true }}
+          rules={{ required: "password should not be empty " }}
         />
         {type === "signUp" && (
           <Controller
             name="email"
             control={control}
-            render={({ field: { onChange, value } }) => (
-              <TextInput
-                style={style.cardText}
-                label={"email"}
-                onChangeText={onChange}
-                value={value}
-              />
+            render={({ field: { onChange, value }, fieldState: { error } }) => (
+              <View>
+                <TextInput
+                  style={style.cardText}
+                  label={"email"}
+                  onChangeText={onChange}
+                  value={value}
+                  keyboardType="email-address"
+                  underlineColor={error ? "red" : "rgb(109, 88, 105)"}
+                />
+                {error && (
+                  <Text style={style.cardErrorText}>{error.message}</Text>
+                )}
+              </View>
             )}
-            rules={{ required: true }}
+            rules={{ required: "email should not be empty " }}
           />
         )}
       </Card.Content>
@@ -134,6 +155,11 @@ const style = StyleSheet.create({
   cardButtonSignIn: {
     position: "relative",
     marginRight: 80,
+    marginBottom: 10,
+  },
+  cardErrorText: {
+    color: "red",
+    alignSelf: "stretch",
     marginBottom: 10,
   },
 });

@@ -1,4 +1,4 @@
-import { ILogin } from "../utils/Ilogin";
+import { ILogin } from "../utils/ILogin";
 import { ILoginService } from "./contracts/ILoginService";
 
 export class LoginService implements ILoginService {
@@ -28,7 +28,22 @@ export class LoginService implements ILoginService {
     }
   }
 
-  signUpUser(signUpUserCredentials: ILoginService): Promise<boolean> {
-    throw new Error("Method not implemented.");
+  async signUpUser(signUpUserCredentials: ILogin): Promise<boolean> {
+    try {
+      const createUser = await fetch(`${this.url}/signUp`, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        method: "POST",
+        body: JSON.stringify(signUpUserCredentials),
+      });
+
+      if (!createUser.ok) {
+        throw new Error(await createUser.text());
+      }
+      return createUser.ok;
+    } catch (error) {
+      throw new Error("error", { cause: error });
+    }
   }
 }

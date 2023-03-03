@@ -8,7 +8,6 @@ import { useNavigation } from "@react-navigation/native";
 export const LoginScreen = () => {
   const [loginCorrect, setLoginCorrect] = useState<boolean>(false);
   const [user, setUser] = useState<string>("");
-
   return (
     <View style={style.container}>
       {!loginCorrect ? (

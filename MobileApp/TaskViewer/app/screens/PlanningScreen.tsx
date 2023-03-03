@@ -1,21 +1,17 @@
+import { RouteProp, useRoute } from "@react-navigation/native";
 import { useEffect, useState } from "react";
 import { View, Text, FlatList, StyleSheet, StatusBar } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { StackParams } from "../../App";
 import { TaskList } from "../components/TaskList";
 import { TaskService } from "../services/TaskService";
 import { ITaskList } from "../utils/ITaskList";
 
-export const PlanningScreen = () => {
-  const api: string = "http://192.168.1.21:3008";
-  const [dbTaskList, setDbTaskList] = useState<ITaskList[]>([]);
-  useEffect(() => {
-    const getTaskList = async () => {
-      const taskList = new TaskService(api);
-      setDbTaskList(await taskList.getTaskList());
-    };
-    getTaskList();
-  }, []);
-
+interface IPlanningScreen {
+  dbTaskList: ITaskList[];
+}
+export const PlanningScreen = (props: IPlanningScreen) => {
+  const { dbTaskList } = props;
   return (
     <SafeAreaView style={styles.container}>
       <TaskList

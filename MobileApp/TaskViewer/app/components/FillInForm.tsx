@@ -25,13 +25,12 @@ export const FillInForm = (props: IFillInForm) => {
     if (type === "login") {
       const user: ILogin[] = await services.checkUser(data);
       if (user.length === 1) {
-        setLoginCorrect((prevState) => !prevState);
         setUser(user[0].user);
+        setLoginCorrect((prevState) => !prevState);
       }
     }
     if (type === "signUp") {
       const signUpUser = await services.signUpUser(data);
-      console.log(signUpUser);
       setLoginCorrect((prevState) => !prevState);
     }
   };

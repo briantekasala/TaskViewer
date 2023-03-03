@@ -21,7 +21,7 @@ export const TaskList = (props: TaskListProps) => {
             backgroundColor: "#4472C4",
             width: "100%",
             textAlign: "center",
-            padding: 20,
+            padding: 10,
           },
         ]}
       >
@@ -34,7 +34,7 @@ export const TaskList = (props: TaskListProps) => {
             backgroundColor: "#f79646",
             width: "100%",
             textAlign: "center",
-            padding: 20,
+            padding: 10,
           },
         ]}
       >
@@ -47,7 +47,7 @@ export const TaskList = (props: TaskListProps) => {
             backgroundColor: "#4bacc6",
             width: "100%",
             textAlign: "center",
-            padding: 20,
+            padding: 10,
           },
         ]}
       >
@@ -60,7 +60,7 @@ export const TaskList = (props: TaskListProps) => {
             backgroundColor: "#9bbb59",
             width: "100%",
             textAlign: "center",
-            padding: 20,
+            padding: 10,
           },
         ]}
       >
@@ -73,7 +73,7 @@ export const TaskList = (props: TaskListProps) => {
             backgroundColor: "#e66c7d",
             width: "100%",
             textAlign: "center",
-            padding: 20,
+            padding: 10,
           },
         ]}
       >
@@ -91,11 +91,11 @@ const styles = StyleSheet.create({
   },
   item: {
     backgroundColor: "rgb(255, 215, 245)",
-    padding: 20,
-    marginVertical: 8,
-    marginHorizontal: 16,
+    padding: 10,
+    marginVertical: 6,
+    marginHorizontal: 10,
   },
   title: {
-    fontSize: 22,
+    fontSize: 18,
   },
 });

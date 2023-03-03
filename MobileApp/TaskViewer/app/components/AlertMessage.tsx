@@ -12,7 +12,7 @@ interface IAlertMessage {
 export const AlertMessage = (props: IAlertMessage) => {
   const { user, headText, subText, buttonText } = props;
   const navigation = useNavigation<NativeStackNavigationProp<StackParams>>();
-  let navText = "Login";
+
   return (
     <Card style={style.alertContent}>
       <Card.Title title="Success" titleStyle={style.alertText} />
@@ -36,7 +36,10 @@ export const AlertMessage = (props: IAlertMessage) => {
           <Button
             mode="contained"
             onPress={() => {
-              navigation.navigate(`Planning`);
+              navigation.navigate(`Planning`, {
+                screen: "Planning",
+                params: { user: user },
+              });
             }}
           >
             {buttonText}

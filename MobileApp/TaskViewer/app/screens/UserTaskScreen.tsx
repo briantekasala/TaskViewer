@@ -1,4 +1,4 @@
-import { View, Text } from "react-native";
+import { View, Text, StyleSheet, StatusBar } from "react-native";
 import { RouteProp, useRoute } from "@react-navigation/native";
 import { StackParams } from "../../App";
 import { ITaskList } from "../utils/ITaskList";
@@ -68,14 +68,14 @@ export const UserTaskScreen = (props: IUserTaskScreen) => {
   const sunday = getSundayDate();
   return (
     <>
-      <View>
+      <View style={styles.todayTaskContainer}>
         <TaskView
           taskData={getTodayTasks(wednesday)}
           nextWeekTaskData={getNextWeekTask(wednesday)}
           userName={user}
         />
       </View>
-      <View>
+      <View style={styles.nextWeekTaskContainer}>
         <TaskView
           userName={user}
           taskData={getTodayTasks(sunday)}
@@ -85,3 +85,12 @@ export const UserTaskScreen = (props: IUserTaskScreen) => {
     </>
   );
 };
+
+const styles = StyleSheet.create({
+  todayTaskContainer: {
+    alignItems: "center",
+  },
+  nextWeekTaskContainer: {
+    alignItems: "center",
+  },
+});

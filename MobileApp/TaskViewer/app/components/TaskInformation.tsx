@@ -1,4 +1,4 @@
-import { View, Text } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import { ITaskList } from "../utils/ITaskList";
 
 interface ITaksInformation {
@@ -11,26 +11,41 @@ export const TaskInformation = (props: ITaksInformation) => {
   const { data, task, userName } = props;
 
   return (
-    <>
-      <View>
+    <View>
+      <View style={styles.container}>
         {data.map((day: ITaskList, index: number) => {
           const dayOnScreen = new Date(day.day);
           return (
-            <Text key={`${dayOnScreen.toDateString()}-${index}`}>
+            <Text
+              style={styles.textStyle}
+              key={`${dayOnScreen.toDateString()}-${index}`}
+            >
               {dayOnScreen.toDateString()}
             </Text>
           );
         })}
-      </View>
-      <View>
+
         {task === "" ? (
-          <Text>u heeft geen taak</Text>
+          <Text style={styles.textStyle}>Vous n'avez pas de tâche </Text>
         ) : (
-          <Text>
+          <Text style={styles.textStyle}>
             {task}:{userName}
           </Text>
         )}
       </View>
-    </>
+    </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    margin: 20,
+    backgroundColor: "rgb(255, 215, 245)",
+    padding: 10,
+  },
+  textStyle: {
+    fontSize: 25,
+    textAlign: "center",
+    padding: 10,
+  },
+});

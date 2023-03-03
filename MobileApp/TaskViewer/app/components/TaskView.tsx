@@ -1,5 +1,5 @@
 import React from "react";
-import { View } from "react-native";
+import { View, Text } from "react-native";
 import { ITaskList } from "../utils/ITaskList";
 import { TaskInformation } from "./TaskInformation";
 
@@ -48,6 +48,9 @@ export const TaskView = (props: ITaskView) => {
         task={task}
         userName={userName}
       />
+      <Text style={{ textAlign: "center", fontSize: 20, fontWeight: "bold" }}>
+        Tâche pour la semaine prochaine
+      </Text>
       <TaskInformation
         key={`${userName}-Information-2`}
         data={nextWeekTaskData}
